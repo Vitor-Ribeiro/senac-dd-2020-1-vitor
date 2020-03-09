@@ -1,5 +1,6 @@
 package model.entity.exercicio01;
 
+
 public class Endereco {
 
 	private int id;
