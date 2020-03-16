@@ -19,14 +19,14 @@ public class Executavel {
 		
 		// TODO criar e SALVAR telefones
 				ArrayList<Telefone> telefones = new ArrayList<Telefone>();
-				Telefone telefone1 = cadastrarTelefoneDaTela();
+				//Telefone telefone1 = cadastrarTelefoneDaTela();
 				// Exercício 2
-				//Cliente cliente1 = obterClienteDaTela(); 
+				Cliente cliente1 = obterClienteDaTela(); 
 				
 
 				// - Salvar no banco (APENAS TESTES, AINDA VIOLANDO O MVC)
-				//ClienteBO clienteBO = new ClienteBO();
-			   //String mensagem = clienteBO.salvar(cliente1);
+				ClienteBO clienteBO = new ClienteBO();
+			   String mensagem = clienteBO.salvar(cliente1);
 
 				//JOptionPane.showMessageDialog(null, mensagem);
 				
