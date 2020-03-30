@@ -1,109 +1,107 @@
 package principal.exercicio01;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import controller.exercicio1.ClienteController;
+import controller.exercicio1.TelefoneController;
 import model.bo.ClienteBO;
-import model.dao.exercicio01.ClienteDAO;
 import model.dao.exercicio01.EnderecoDAO;
-import model.dao.exercicio01.TelefoneDAO;
 import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Endereco;
 import model.entity.exercicio01.Telefone;
 
 public class Executavel {
 
-	public static void main(String[] args) {
-		
-		// TODO criar e SALVAR telefones
-				ArrayList<Telefone> telefones = new ArrayList<Telefone>();
-				//Telefone telefone1 = cadastrarTelefoneDaTela();
-				// Exercício 2
-				Cliente cliente1 = obterClienteDaTela(); 
-				
+	public static void main(String[] argumentosLinhaDeComando) {
 
-				// - Salvar no banco (APENAS TESTES, AINDA VIOLANDO O MVC)
-				ClienteBO clienteBO = new ClienteBO();
-			   String mensagem = clienteBO.salvar(cliente1);
+		executarExercicio2();
 
-				//JOptionPane.showMessageDialog(null, mensagem);
-				
-			}
+		executarExercicio3();
+	}
 
-			private static Cliente obterClienteDaTela() {
-				String nome = JOptionPane.showInputDialog("Informe o nome");
-				String sobrenome = JOptionPane.showInputDialog("Informe o sobrenome");
-				String cpf = JOptionPane.showInputDialog("Informe o CPF");
+	/**
+	 * Exercício 2 - Cadastro de cliente com JOptionPane
+	 * 
+	 * Obtém um cliente da tela e salva no banco
+	 * 
+	 * Obs.: ainda está violando o MVC, pois chama um BO (da camada model), o
+	 * correto é chamar um controller.
+	 */
+	private static void executarExercicio2() {
+		Cliente cliente1 = obterClienteDaTela();
 
-				EnderecoDAO endDAO = new EnderecoDAO();
-				ArrayList<Endereco> listaEnderecos = endDAO.consultarTodos();
-				
-				Object[] enderecos = listaEnderecos.toArray();
-				Endereco enderecoSelecionado = (Endereco) JOptionPane.showInputDialog(null, 
-						"Selecione um endereço", "Endereço", 
-						JOptionPane.QUESTION_MESSAGE, 
-						null, enderecos, null);
+		// - Salvar no banco (APENAS TESTES, AINDA VIOLANDO O MVC)
+		ClienteBO clienteBO = new ClienteBO();
+		String mensagem = clienteBO.salvar(cliente1);
 
-				Cliente novoCliente = new Cliente(nome, sobrenome, cpf, 
-						new ArrayList<Telefone>(), enderecoSelecionado);
-				ClienteBO cliBO = new ClienteBO();
-				cliBO.salvar(novoCliente);
-			
-				return novoCliente;
-			}
-			
-			private static Telefone cadastrarTelefoneDaTela() {
-						
-				String codigoPais = JOptionPane.showInputDialog("Informe o código telefônico do País: ");
-				String ddd = JOptionPane.showInputDialog("Informe o DDD do telefone: ");
-				String numero = JOptionPane.showInputDialog("Informe o número do telefone: ");
-				
-				int isMovel = JOptionPane.showConfirmDialog(null, "Este telefone é móvel?", "Telefone", JOptionPane.YES_NO_OPTION);
-		        boolean movel = false;
-		        if(isMovel == 0) {
-		            System.out.println("O telefone é móvel");
-		            movel = true;
-		        } else if(isMovel == 1) {
-		            System.out.println("O telefone é fixo");
-		            movel = false;
-		        } else {
-		            System.out.println("Erro, processo cancelado.");
-		            JOptionPane.showMessageDialog(null, "Erro, processo cancelado.");
-		        }
-		        
-		        TelefoneDAO telDAO = new TelefoneDAO();
-		        Telefone novoTelefone = new Telefone();
-		        int isAtivo = JOptionPane.showConfirmDialog(null, "Há proprietário para esta linha?", "Telefone", JOptionPane.YES_NO_OPTION);
-		        boolean ativo = false;
-		        if(isAtivo == 0) {
-		        	ClienteDAO clienteDAO = new ClienteDAO();
-					ArrayList<Cliente> listaClientes = clienteDAO.consultarTodos();
-					Object[] clientes = listaClientes.toArray();
-		        	System.out.println("O telefone está ativo. Tem proprietário.");
-		            ativo = true;
-		            Cliente clienteSelecionado = (Cliente) JOptionPane.showInputDialog(null, 
-							"Selecione um cliente: ", "Cliente", 
-							JOptionPane.QUESTION_MESSAGE, 
-							null, clientes, null);
-		           novoTelefone = new Telefone(0, clienteSelecionado, codigoPais, ddd, numero, movel, ativo);
-		           telDAO.salvar(novoTelefone); 
-		        } else if(isAtivo == 1) {
-		            System.out.println("O telefone está inativo. Não tem proprietário.");
-		            ativo = false;
-		            Cliente clienteVazio = new Cliente();
-		            novoTelefone = new Telefone(0, clienteVazio, codigoPais, ddd, numero, movel, ativo);
-			        telDAO.salvar(novoTelefone);
-		            
-		        } else {
-		            System.out.println("Erro, processo cancelado.");
-		            JOptionPane.showMessageDialog(null, "Erro, processo cancelado.");
-		        }
-		        
-		        
-		        
-			return novoTelefone;	
-			}
+		JOptionPane.showMessageDialog(null, mensagem);
+	}
 
+	/**
+	 * Exercício 3 - Cadastro de telefones com JOptionPane
+	 * 
+	 * Obtém um telefone da tela e salva no banco
+	 * 
+	 * Salvar telefones com e sem dono.
+	 */
+	private static void executarExercicio3() {
+		Telefone novoTelefone = obterTelefoneDaTela();
+
+		TelefoneController controlador = new TelefoneController();
+		String mensagem = controlador.salvar(novoTelefone);
+
+		JOptionPane.showMessageDialog(null, mensagem);
+	}
+
+	private static Telefone obterTelefoneDaTela() {
+		Telefone novoTelefone = new Telefone();
+
+		String codigoPais = JOptionPane.showInputDialog("Informe o código do país");
+		String ddd = JOptionPane.showInputDialog("Informe o DDD (2 dígitos)");
+		String numero = JOptionPane.showInputDialog("Informe o número");
+		int opcaoMovel = JOptionPane.showConfirmDialog(null, "O telefone é móvel?", "Selecione",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+		int opcaoAtivo = JOptionPane.showConfirmDialog(null, "O telefone está ativo?", "Selecione",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+
+		novoTelefone.setCodigoPais(codigoPais);
+		novoTelefone.setDdd(ddd);
+		novoTelefone.setNumero(numero);
+		novoTelefone.setMovel(opcaoMovel == JOptionPane.YES_OPTION);
+		novoTelefone.setAtivo(opcaoAtivo == JOptionPane.YES_OPTION);
+
+		int opcaoDono = JOptionPane.showConfirmDialog(null, "O telefone possui dono?", "Selecione",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+
+		if (opcaoDono == JOptionPane.YES_OPTION) {
+			ClienteController controlador = new ClienteController();
+			ArrayList<Cliente> clientes = controlador.listarTodosOsClientes();
+
+			Cliente clienteSelecionado = (Cliente) JOptionPane.showInputDialog(null, "Selecione um cliente", "Clientes",
+					JOptionPane.QUESTION_MESSAGE, null, clientes.toArray(), null);
+
+			novoTelefone.setDono(clienteSelecionado);
+		}
+
+		return novoTelefone;
+	}
+
+	private static Cliente obterClienteDaTela() {
+		String nome = JOptionPane.showInputDialog("Informe o nome");
+		String sobrenome = JOptionPane.showInputDialog("Informe o sobrenome");
+		String cpf = JOptionPane.showInputDialog("Informe o CPF");
+
+		EnderecoDAO endDAO = new EnderecoDAO();
+		ArrayList<Endereco> listaEnderecos = endDAO.consultarTodos();
+
+		Object[] enderecos = listaEnderecos.toArray();
+		Endereco enderecoSelecionado = (Endereco) JOptionPane.showInputDialog(null, "Selecione um endereço", "Endereço",
+				JOptionPane.QUESTION_MESSAGE, null, enderecos, null);
+
+		Cliente novoCliente = new Cliente(nome, sobrenome, cpf, new ArrayList<Telefone>(), enderecoSelecionado);
+
+		return novoCliente;
+	}
 }

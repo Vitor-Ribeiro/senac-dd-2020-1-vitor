@@ -43,24 +43,7 @@ public class ClienteDAO {
 		return novoCliente;
 	}
 
-	public boolean excluir(int id) {
-		// TODO liberar todos os telefones que o usuário possuía
-		
-		// TODO Apagar o cliente ou fazer exclusão lógica?
-		Connection conn = Banco.getConnection();
-		String sql = "DELETE FROM CLIENTE WHERE ID= " + id;
-		Statement stmt = Banco.getStatement(conn);
-		
-		int quantidadeLinhasAfetadas = 0;
-		try {
-			quantidadeLinhasAfetadas = stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			System.out.println("Erro ao excluir cliente.");
-			System.out.println("Erro: " + e.getMessage());
-		}
-		
-		return quantidadeLinhasAfetadas > 0;
-	}
+
 
 	public boolean alterar(Cliente cliente) {
 		Connection conexao = Banco.getConnection();
@@ -161,5 +144,49 @@ public class ClienteDAO {
 		
 		return cpfUsado;
 	}
+
+	
+	public boolean excluir(Cliente cliente ) {
+		String sql = " DELETE FROM cliente WHERE id = ?";
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);
+		boolean excluiu = false;
+		try {
+			preparedStatement.setInt(1, cliente.getId());
+			int codigoRetornoUpdate = preparedStatement.executeUpdate();
+
+			excluiu = (codigoRetornoUpdate == Banco.CODIGO_RETORNO_SUCESSO_EXCLUSAO);
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao excluir cliente. Id: " + cliente + " .Causa: " + ex.getMessage());
+		}
+		return excluiu;
+	}
+
+	public boolean temClienteCadastradoComCpfUsado(String cpf) {
+		String sql = " SELECT cpf FROM cliente WHERE cpf = " + cpf;
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);
+
+		boolean clienteJaCadastrado = false;
+		try {
+			ResultSet conjuntoResultante = preparedStatement.executeQuery();
+			clienteJaCadastrado = conjuntoResultante.next();
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao verificar se cliente consta no banco. Causa: " + ex.getMessage());
+		}
+
+		return clienteJaCadastrado;
+	}
+
+	
+
+
+
+
+	
+
+
 
 }

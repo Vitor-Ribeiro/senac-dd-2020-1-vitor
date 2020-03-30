@@ -34,5 +34,25 @@ public class ClienteBO {
 		
 		return mensagem;
 	}
+	
+	
+	public String excluir(Cliente cliente) {
+		String mensagem = "";
+		if (cliente.getTelefones().isEmpty()) {
+			if (dao.excluir(cliente)) {
+				mensagem = "Excluído com sucesso";
+			} else {
+				mensagem = "Erro ao excluir";
+			}
+		} else {
+			mensagem = "Cliente com cpf (" + cliente.getCpf() + ") possui telefone cadastrado.";
+		}
+
+		return mensagem;
+	}
+
+
+
+	
 
 }
