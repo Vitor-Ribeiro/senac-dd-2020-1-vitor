@@ -12,6 +12,8 @@ import controller.exercicio1.EnderecoController;
 import model.dao.exercicio01.ClienteDAO;
 import model.dao.exercicio01.EnderecoDAO;
 import model.dao.exercicio01.TelefoneDAO;
+import model.entity.exercicio01.Endereco;
+import model.entity.exercicio01.Telefone;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class TelaCadastroCliente extends JFrame {
@@ -29,6 +32,7 @@ public class TelaCadastroCliente extends JFrame {
 	private JComboBox cbEndereco;
 	private JTextField txtSobrenome;
 	ClienteDAO dao = new ClienteDAO();
+	private JTextField txtTelefone;
 	
 
 	/**
@@ -86,11 +90,14 @@ public class TelaCadastroCliente extends JFrame {
 		cbEndereco.setBounds(256, 81, 515, 27);
 		contentPane.add(cbEndereco);
 		
+		
+		
 		JButton btnSalvar = new JButton("SALVAR");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClienteDAO dao = new ClienteDAO();
-				dao.salvar(txtNome.getText(), txtSobrenome.getText(),(String) cbEndereco.getSelectedItem(), txtCpf.getText());
+				ClienteController controller = new ClienteController();
+
+                controller.salvarCliente(txtNome.getText(), txtSobrenome.getText(), txtCpf.getText(), cbEndereco.getSelectedItem());
 			}
 		});
 		btnSalvar.setBounds(139, 173, 140, 77);
@@ -108,6 +115,15 @@ public class TelaCadastroCliente extends JFrame {
 		txtSobrenome.setBounds(275, 30, 86, 20);
 		contentPane.add(txtSobrenome);
 		txtSobrenome.setColumns(10);
+		
+		JLabel lblTelefone = new JLabel("Telefone");
+		lblTelefone.setBounds(26, 130, 46, 14);
+		contentPane.add(lblTelefone);
+		
+		txtTelefone = new JTextField();
+		txtTelefone.setBounds(88, 127, 86, 20);
+		contentPane.add(txtTelefone);
+		txtTelefone.setColumns(10);
 	}
 
 }
