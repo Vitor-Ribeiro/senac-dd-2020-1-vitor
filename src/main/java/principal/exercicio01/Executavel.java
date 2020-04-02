@@ -18,7 +18,7 @@ public class Executavel {
 
 		executarExercicio2();
 
-		executarExercicio3();
+		//executarExercicio3();
 	}
 
 	/**
@@ -50,9 +50,9 @@ public class Executavel {
 		Telefone novoTelefone = obterTelefoneDaTela();
 
 		TelefoneController controlador = new TelefoneController();
-		String mensagem = controlador.salvar(novoTelefone);
+		//String mensagem = controlador.salvar(novoTelefone);
 
-		JOptionPane.showMessageDialog(null, mensagem);
+		//JOptionPane.showMessageDialog(null, mensagem);
 	}
 
 	private static Telefone obterTelefoneDaTela() {

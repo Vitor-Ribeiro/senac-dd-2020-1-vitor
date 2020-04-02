@@ -45,22 +45,23 @@ public class TelaExclusaoCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaExclusaoCliente() {
+		setTitle("Exclus\u00E3o de clientes");
 		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 565, 371);
+		setBounds(100, 100, 392, 237);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblSelecionarCliente = new JLabel("Selecione o cliente ");
-		lblSelecionarCliente.setBounds(30, 44, 101, 14);
+		lblSelecionarCliente.setBounds(10, 44, 121, 14);
 		ClienteController controller = new ClienteController();
 		contentPane.add(lblSelecionarCliente);
 		
 		cbClientes = new JComboBox(controller.listarTodosOsClientes().toArray());
-		cbClientes.setBounds(141, 38, 383, 27);
+		cbClientes.setBounds(141, 38, 225, 27);
 		contentPane.add(cbClientes);
 		
 		JButton btnExcluir = new JButton("EXCLUIR");

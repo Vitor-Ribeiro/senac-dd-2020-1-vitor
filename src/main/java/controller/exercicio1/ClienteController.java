@@ -2,16 +2,16 @@ package controller.exercicio1;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.bo.ClienteBO;
-import model.bo.EnderecoBO;
+
 import model.dao.exercicio01.ClienteDAO;
 import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Endereco;
-import model.entity.exercicio01.Telefone;
+
 
 public class ClienteController {
-	private static final int TAMANHO_MINIMO_CAMPO_CPF = 1;
-	private static final int TAMANHO_MAXIMO_CAMPO_CPF = 11;
 
 	private ClienteBO bo = new ClienteBO();
 	
@@ -31,45 +31,60 @@ public class ClienteController {
 		return mensagem;
 	}
 	
-	public String salvar(String nome, String sobrenome, String cpf, ArrayList<Telefone> telefones, Endereco endereco) {
+	public String validarSobrenome(String sobrenome) {
 		String mensagem = "";
-
-		// Validações dos campos
-		mensagem += validarCampoDeTexto("Cpf", cpf, TAMANHO_MINIMO_CAMPO_CPF, TAMANHO_MAXIMO_CAMPO_CPF,
-				true);
 		
-
-		if (mensagem.isEmpty()) {
-			Cliente cliente = new Cliente(nome, sobrenome, cpf, telefones, endereco);
-			mensagem = bo.salvar(cliente);
+		if(sobrenome.isEmpty()) {
+			mensagem = "O campo SOBRENOME não pode ficar vazio.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
 		}
-
+		
+		
 		return mensagem;
 	}
-
-	private String validarCampoDeTexto(String nomeDoCampo, String valor, int tamanhoMinimo, int tamanhoMaximo,
-			boolean obrigatorio) {
-		String mensagemValidacao = "";
-
-		if (obrigatorio && valor != null 
-					&& !valor.isEmpty() 
-					|| valor.length() < tamanhoMinimo 
-					|| valor.length() > tamanhoMaximo) {
-				mensagemValidacao = nomeDoCampo + " deve possuir pelo menos " + tamanhoMinimo + " e no máximo "
-						+ tamanhoMaximo + " caracteres \n";
-			}
-
-		return mensagemValidacao;
+	
+	public String validarCpf(String cpf) {
+		String mensagem = "";
+		
+		if(cpf.length() != 11) {
+			mensagem = "O campo CPF não pode ter mais de 11 dígitos.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
+		}
+		
+		return mensagem;
+	}
+	
+	public String validarNome(String nome) {
+		String mensagem = "";
+		
+		if(nome.isEmpty()) {
+			mensagem = "O campo NOME não pode ficar vazio.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
+		}
+		return mensagem; 
+	}
+	
+	public String validarCpfObrigatorio(String cpf) {
+		String mensagem = "";
+		
+		if(cpf.isEmpty()) {
+			mensagem = "O campo CPF não pode ficar vazio.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
+		}
+		return mensagem; 
 	}
 	
 	public String salvarCliente(String txtNome, String txtSobrenome, String txtCpf, Object txtEndereco) {
         String mensagem = "";
+        
+        
 
         ClienteBO bo = new ClienteBO();
         Cliente cliente = criarCliente(txtNome, txtSobrenome, txtCpf, txtEndereco);
         bo.salvar(cliente);
         return mensagem;
     }
+	
     public Cliente criarCliente(String txtNome, String txtSobrenome, String txtCpf, Object txtEndereco) {
         Cliente cliente = new Cliente ();
         cliente.setNome(txtNome);

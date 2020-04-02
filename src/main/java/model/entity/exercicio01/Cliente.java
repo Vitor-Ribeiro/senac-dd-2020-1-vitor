@@ -69,14 +69,8 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		String mensagem = "Cliente: " + this.getNomeCompleto() + " (" + cpf + "). " + "\nEndereço: " + endereco
-				+ "\nTelefones: ";
+		return  "Cliente: " + this.getNomeCompleto() + " (" + cpf + ")";
 
-		for (Telefone t : telefones) {
-			mensagem += t.toString() + "\n";
-		}
-
-		return mensagem;
 	}
 
 	public int getId() {

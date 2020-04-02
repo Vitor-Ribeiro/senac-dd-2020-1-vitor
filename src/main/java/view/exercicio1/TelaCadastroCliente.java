@@ -32,7 +32,6 @@ public class TelaCadastroCliente extends JFrame {
 	private JComboBox cbEndereco;
 	private JTextField txtSobrenome;
 	ClienteDAO dao = new ClienteDAO();
-	private JTextField txtTelefone;
 	
 
 	/**
@@ -58,7 +57,7 @@ public class TelaCadastroCliente extends JFrame {
 	public TelaCadastroCliente() {
 		setTitle("Cadastramento de Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 734, 536);
+		setBounds(100, 100, 658, 308);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,25 +68,25 @@ public class TelaCadastroCliente extends JFrame {
 		contentPane.add(lblNome);
 		
 		JLabel lblCpf = new JLabel("cpf:");
-		lblCpf.setBounds(26, 87, 46, 14);
+		lblCpf.setBounds(26, 88, 46, 14);
 		contentPane.add(lblCpf);
 		
 		JLabel lblEndereco = new JLabel("endereco:");
-		lblEndereco.setBounds(198, 87, 67, 14);
+		lblEndereco.setBounds(198, 88, 67, 14);
 		contentPane.add(lblEndereco);
 		
 		txtCpf = new JTextField();
-		txtCpf.setBounds(88, 84, 86, 20);
+		txtCpf.setBounds(82, 85, 86, 20);
 		contentPane.add(txtCpf);
 		txtCpf.setColumns(10);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(88, 30, 86, 20);
+		txtNome.setBounds(82, 30, 86, 20);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		EnderecoDAO dao = new EnderecoDAO();
 		cbEndereco = new JComboBox(dao.consultarTodos().toArray());
-		cbEndereco.setBounds(256, 81, 515, 27);
+		cbEndereco.setBounds(269, 82, 363, 27);
 		contentPane.add(cbEndereco);
 		
 		
@@ -95,12 +94,19 @@ public class TelaCadastroCliente extends JFrame {
 		JButton btnSalvar = new JButton("SALVAR");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String mensagem = "";
 				ClienteController controller = new ClienteController();
-
-                controller.salvarCliente(txtNome.getText(), txtSobrenome.getText(), txtCpf.getText(), cbEndereco.getSelectedItem());
+				mensagem += controller.validarSobrenome(txtSobrenome.getText());
+				mensagem += controller.validarNome(txtNome.getText());
+				mensagem += controller.validarCpf(txtCpf.getText());
+				mensagem += controller.validarCpfObrigatorio(txtCpf.getText());
+				if(mensagem.isEmpty()) {
+					controller.salvarCliente(txtNome.getText(), txtSobrenome.getText(), txtCpf.getText(), cbEndereco.getSelectedItem());
+				}
+				
 			}
 		});
-		btnSalvar.setBounds(139, 173, 140, 77);
+		btnSalvar.setBounds(198, 165, 140, 77);
 		contentPane.add(btnSalvar);
 		
 		
@@ -108,22 +114,13 @@ public class TelaCadastroCliente extends JFrame {
 		
 		
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
-		lblSobrenome.setBounds(198, 33, 67, 14);
+		lblSobrenome.setBounds(198, 33, 80, 14);
 		contentPane.add(lblSobrenome);
 		
 		txtSobrenome = new JTextField();
-		txtSobrenome.setBounds(275, 30, 86, 20);
+		txtSobrenome.setBounds(297, 30, 86, 20);
 		contentPane.add(txtSobrenome);
 		txtSobrenome.setColumns(10);
-		
-		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setBounds(26, 130, 46, 14);
-		contentPane.add(lblTelefone);
-		
-		txtTelefone = new JTextField();
-		txtTelefone.setBounds(88, 127, 86, 20);
-		contentPane.add(txtTelefone);
-		txtTelefone.setColumns(10);
 	}
 
 }

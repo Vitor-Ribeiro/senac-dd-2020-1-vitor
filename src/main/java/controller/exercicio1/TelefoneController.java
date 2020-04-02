@@ -1,9 +1,13 @@
 package controller.exercicio1;
 
+import javax.swing.JOptionPane;
+
 import model.bo.TelefoneBO;
+import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Telefone;
 
 public class TelefoneController {
+	
 
 	private TelefoneBO bo = new TelefoneBO();
 
@@ -19,43 +23,72 @@ public class TelefoneController {
 	 * 
 	 *         (3) erro ao salvar
 	 */
-	public String salvar(Telefone novoTelefone) {
-		String mensagemValidacao = validarCampos(novoTelefone);
 
-		if (mensagemValidacao.isEmpty()) {
-			mensagemValidacao = bo.salvar(novoTelefone);
-		}
-		return mensagemValidacao;
-	}
 
-	private String validarCampos(Telefone novoTelefone) {
+	
+	public String validarCodigoPais(String codigoPais) {
 		String mensagem = "";
-
-		if (novoTelefone == null) {
-			mensagem = "Telefone não foi criado";
-		} else {
-			if (novoTelefone.getDdd().trim().length() != 2) {
-				mensagem += "Informe o DDD com 2 dígitos \n";
-			}
-
-			try {
-				Integer.parseInt(novoTelefone.getDdd());
-			} catch (NumberFormatException ex) {
-				mensagem += "O DDD deve ser um NÚMERO";
-			}
+		
+		if(codigoPais.isEmpty()) {
+			mensagem = "O campo de Código do País deve ser preenchido.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
 		}
-
-		// TODO fazer mais validações
-		// Numero
-
-		// Codigo pais
+		
+		return mensagem;
+	}
+	
+	public String validarDdd(String ddd) {
+		String mensagem = "";
+		
+		if(ddd.isEmpty()) {
+			mensagem = "O campo de DDD deve ser preenchido.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
+		}
+		
+		return mensagem;
+	}
+	
+	public String validarNumero(String numero) {
+		String mensagem = "";
+		
+		if(numero.length() != 9) {
+			mensagem = "O campo de NUMERO deve possuir até 9 dígitos.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
+		}
+		return mensagem;
+	}
+	
+	public String validarNumeroObrigatorio(String numero) {
+		String mensagem = "";
+		
+		if(numero.isEmpty()) {
+			mensagem = "O campo de NUMERO deve ser preenchido.\n";
+			JOptionPane.showMessageDialog(null, mensagem);
+		}
 		return mensagem;
 	}
 
-	private String validarCampoNumerico(String valorDoCampo, String nomeDoCampo, int tamanhoMinimo, int tamanhoMaximo) {
-		// TODO desenvolver
+	public String salvarTelefone(Object cbDono, String txtCodigoPais, String txtDdd, String txtNumero, boolean cbMovel, boolean cbAtivo) {
+        String mensagem = "";
+        
+        System.out.println(txtNumero);
+        TelefoneBO bo = new TelefoneBO();
+        Telefone telefone = criarTelefone(cbDono, txtCodigoPais, txtDdd, txtNumero, cbMovel, cbAtivo);
+        bo.salvar(telefone);
+        return mensagem;
+    }
+    public Telefone criarTelefone(Object cbDono, String txtCodigoPais, String txtDdd, String txtNumero, boolean cbMovel, boolean cbAtivo) {
+    	Telefone telefone = new Telefone ();
+        telefone.setCodigoPais(txtCodigoPais);
+        telefone.setDdd(txtDdd);
+        telefone.setNumero(txtNumero);
+        telefone.setMovel(cbMovel);
+        telefone.setAtivo(cbAtivo);
 
-		return "";
-	}
+        Cliente cliente = (Cliente)cbDono;
+        telefone.setDono(cliente);
+
+        return telefone;
+    }
 
 }

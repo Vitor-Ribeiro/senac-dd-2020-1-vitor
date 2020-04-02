@@ -7,17 +7,22 @@ public class TelefoneBO {
 
 	private TelefoneDAO dao = new TelefoneDAO();
 
-	public String salvar(Telefone novoTelefone) {
+	public String salvar(Telefone telefone) {
 		String mensagem = "";
 
-		novoTelefone = dao.salvar(novoTelefone);
+		telefone = dao.salvar(telefone);
 
-		if (novoTelefone.getId() > 0) {
+		if (telefone.getId() > 0) {
 			mensagem = "Telefone cadastrado com sucesso";
 		} else {
 			mensagem = "Erro ao cadastrar telefone";
 		}
 		return mensagem;
+	}
+
+	public String salvar(String dono, String codigoPais, String ddd, String numero, boolean movel, boolean ativo) {
+		
+		return null;
 	}
 
 }
