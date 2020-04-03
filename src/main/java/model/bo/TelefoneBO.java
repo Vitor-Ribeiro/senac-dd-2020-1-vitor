@@ -1,5 +1,7 @@
 package model.bo;
 
+import java.util.ArrayList;
+
 import model.dao.exercicio01.TelefoneDAO;
 import model.entity.exercicio01.Telefone;
 
@@ -23,6 +25,10 @@ public class TelefoneBO {
 	public String salvar(String dono, String codigoPais, String ddd, String numero, boolean movel, boolean ativo) {
 		
 		return null;
+	}
+	
+	public ArrayList<Telefone> pesquisarTodos() {
+		return dao.consultarTodos();
 	}
 
 }

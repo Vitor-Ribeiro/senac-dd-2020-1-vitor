@@ -1,5 +1,7 @@
 package model.bo;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import model.dao.exercicio01.ClienteDAO;
@@ -51,7 +53,9 @@ public class ClienteBO {
 		return mensagem;
 	}
 
-
+	public ArrayList<Cliente> pesquisarTodosClientes() {
+		return dao.consultarTodos();
+	}
 
 	
 

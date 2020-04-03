@@ -122,7 +122,7 @@ public class TelaCadastroTelefone extends JFrame {
 								
 			}
 		});
-		btnSalvar.setBounds(151, 170, 155, 63);
+		btnSalvar.setBounds(76, 169, 155, 63);
 		contentPane.add(btnSalvar);
 		
 	
@@ -130,6 +130,10 @@ public class TelaCadastroTelefone extends JFrame {
 		JLabel lblDono = new JLabel("Dono:");
 		lblDono.setBounds(207, 100, 35, 14);
 		contentPane.add(lblDono);
+		
+		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.setBounds(287, 169, 155, 63);
+		contentPane.add(btnVoltar);
 		
 		
 	}

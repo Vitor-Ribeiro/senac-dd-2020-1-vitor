@@ -71,9 +71,34 @@ public class ClienteDAO {
 	}
 
 	public Cliente consultarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		
+		 Connection conn = Banco.getConnection();
+	        String sql = "SELECT * FROM cliente WHERE id = ?";
+	        PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+	        ResultSet rs = null;
+	        
+	        Cliente cliente = new Cliente();
+
+	        try {
+	            stmt.setInt(1, id);
+	            rs = stmt.executeQuery();
+	            while(rs.next()) {
+	                cliente.setId(rs.getInt(1));
+	                cliente.setNome(rs.getString(2));
+	                cliente.setSobrenome(rs.getString(3));
+	                cliente.setCpf(rs.getString(4));
+	            }
+	        } catch (SQLException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } finally {
+	            Banco.closeResultSet(rs);
+	            Banco.closePreparedStatement(stmt);
+	            Banco.closeConnection(conn);
+	        }
+	        return cliente;
+	   }
+	
 
 	public ArrayList<Cliente> consultarTodos() {
 		Connection conexao = Banco.getConnection();
