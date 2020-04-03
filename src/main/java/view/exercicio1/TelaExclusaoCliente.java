@@ -73,7 +73,17 @@ public class TelaExclusaoCliente extends JFrame {
 				JOptionPane.showMessageDialog(null, mensagem);
 			}
 		});
-		btnExcluir.setBounds(101, 107, 150, 68);
+		btnExcluir.setBounds(27, 107, 150, 68);
 		contentPane.add(btnExcluir);
+		
+		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuClientes.main(null);
+				dispose();
+			}
+		});
+		btnVoltar.setBounds(213, 107, 153, 68);
+		contentPane.add(btnVoltar);
 	}
 }

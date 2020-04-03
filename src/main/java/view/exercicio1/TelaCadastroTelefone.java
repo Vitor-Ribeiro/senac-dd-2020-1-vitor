@@ -132,6 +132,12 @@ public class TelaCadastroTelefone extends JFrame {
 		contentPane.add(lblDono);
 		
 		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuTelefones.main(null);
+				dispose();
+			}
+		});
 		btnVoltar.setBounds(287, 169, 155, 63);
 		contentPane.add(btnVoltar);
 		

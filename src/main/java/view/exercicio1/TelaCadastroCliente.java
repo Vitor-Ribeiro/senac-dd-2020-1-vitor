@@ -123,6 +123,12 @@ public class TelaCadastroCliente extends JFrame {
 		txtSobrenome.setColumns(10);
 		
 		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuClientes.main(null);
+				dispose();
+			}
+		});
 		btnVoltar.setBounds(409, 165, 148, 77);
 		contentPane.add(btnVoltar);
 	}
