@@ -74,4 +74,3 @@ public class TelaExclusaoEndereco {
 		frmExclusaoEnderecos.getContentPane().add(btnExcluir);
 	}
 }
-

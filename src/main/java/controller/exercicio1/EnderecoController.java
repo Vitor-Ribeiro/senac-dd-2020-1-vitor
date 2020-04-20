@@ -1,19 +1,17 @@
 package controller.exercicio1;
 
-import model.bo.EnderecoBO;
-import model.entity.exercicio01.Endereco;
+import java.util.ArrayList;
+
+import model.bo.exercicio1.EnderecoBO;
+import model.dao.exercicio1.EnderecoDAO;
+import model.vo.exercicio1.Endereco;
 
 public class EnderecoController {
-
-	private static final int TAMANHO_MINIMO_CAMPO_RUA = 3;
-	private static final int TAMANHO_MAXIMO_CAMPO_RUA = 255;
-
-	private static final int TAMANHO_MINIMO_CAMPO_CIDADE = 3;
-	private static final int TAMANHO_MAXIMO_CAMPO_CIDADE = 255;
 
 	private EnderecoBO bo = new EnderecoBO();
 
 	public String excluir(String textoIdSelecionado) {
+
 		String mensagem = "";
 		try {
 			int idSelecionado = Integer.parseInt(textoIdSelecionado);
@@ -23,37 +21,16 @@ public class EnderecoController {
 		}
 		return mensagem;
 	}
-
-	public String salvar(String rua, String bairro, String numero, String cep, String cidade, String estado) {
-		String mensagem = "";
-
-		// Validações dos campos
-		mensagem += validarCampoDeTexto("Rua", rua, TAMANHO_MINIMO_CAMPO_RUA, TAMANHO_MAXIMO_CAMPO_RUA, true);
-		mensagem += validarCampoDeTexto("Cidade", cidade, TAMANHO_MINIMO_CAMPO_CIDADE, TAMANHO_MAXIMO_CAMPO_CIDADE,
-				true);
-		mensagem += validarCampoDeTexto("Sigla do estado", estado, 2, 2, true);
-
-		if (mensagem.isEmpty()) {
-			Endereco novoEndereco = new Endereco(rua, cep, estado, cidade, bairro, numero);
-			mensagem = bo.salvar(novoEndereco);
-		}
-
-		return mensagem;
+	
+	public ArrayList<Endereco> consultarTodosEnderecos() {
+		ArrayList<Endereco> enderecos = bo.consultarTodosEnderecos();
+		return enderecos;
 	}
-
-	private String validarCampoDeTexto(String nomeDoCampo, String valor, int tamanhoMinimo, int tamanhoMaximo,
-			boolean obrigatorio) {
-		String mensagemValidacao = "";
-
-		if (obrigatorio && valor != null 
-					&& !valor.isEmpty() 
-					|| valor.length() < tamanhoMinimo 
-					|| valor.length() > tamanhoMaximo) {
-				mensagemValidacao = nomeDoCampo + " deve possuir pelo menos " + tamanhoMinimo + " e no máximo "
-						+ tamanhoMaximo + " caracteres \n";
-			}
-
-		return mensagemValidacao;
+	
+	public ArrayList<Endereco> preencherEndereco() {
+		EnderecoBO enderecoBO = new EnderecoBO();
+		ArrayList<Endereco> enderecos = enderecoBO.consultarTodosEnderecos();
+		return enderecos;
 	}
 
 }

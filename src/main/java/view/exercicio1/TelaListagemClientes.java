@@ -7,20 +7,18 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.exercicio1.ClienteController;
-import model.entity.exercicio01.Cliente;
+import model.vo.exercicio1.Cliente;
 
-public class TelaListagemClientes {
+public class TelaListagemClientes extends JFrame {
 
 	private JFrame frmListagemDeClientes;
 	private JTable tblClientes;
 	private ArrayList<Cliente> clientes;
 	private String[] nomesColunas = { "Nome completo", "CPF", "Qtde. Telefones" };
-	private JButton btnVoltar;
 
 	private void limparTabelaClientes() {
 		tblClientes.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
@@ -51,6 +49,8 @@ public class TelaListagemClientes {
 				try {
 					TelaListagemClientes window = new TelaListagemClientes();
 					window.frmListagemDeClientes.setVisible(true);
+					window.setResizable(false);
+					window.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,21 +84,12 @@ public class TelaListagemClientes {
 				atualizarTabelaClientes();
 			}
 		});
-		btnBuscar.setBounds(200, 30, 120, 30);
+		btnBuscar.setBounds(280, 30, 120, 30);
 		frmListagemDeClientes.getContentPane().add(btnBuscar);
 
 		tblClientes = new JTable();
 		tblClientes.setBounds(25, 70, 650, 400);
 		frmListagemDeClientes.getContentPane().add(tblClientes);
-		
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaMenuClientes.main(null);
-				frmListagemDeClientes.dispose();
-			}
-		});
-		btnVoltar.setBounds(400, 30, 120, 30);
-		frmListagemDeClientes.getContentPane().add(btnVoltar);
 	}
+
 }

@@ -1,38 +1,31 @@
 package view.exercicio1;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.exercicio1.ClienteController;
 import controller.exercicio1.EnderecoController;
-import model.dao.exercicio01.ClienteDAO;
-import model.dao.exercicio01.EnderecoDAO;
-import model.dao.exercicio01.TelefoneDAO;
-import model.entity.exercicio01.Endereco;
-import model.entity.exercicio01.Telefone;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
+import controller.exercicio1.TelefoneController;
+import model.vo.exercicio1.Endereco;
 
 public class TelaCadastroCliente extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtCpf;
 	private JTextField txtNome;
-	private JComboBox cbEndereco;
 	private JTextField txtSobrenome;
-	ClienteDAO dao = new ClienteDAO();
-	
+	private EnderecoController enderecoController;
+	private ClienteController clienteController;
+	private JTextField txtCpf;
 
 	/**
 	 * Launch the application.
@@ -43,94 +36,87 @@ public class TelaCadastroCliente extends JFrame {
 				try {
 					TelaCadastroCliente frame = new TelaCadastroCliente();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-	
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaCadastroCliente() {
-		setTitle("Cadastramento de Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 658, 308);
+		setBounds(100, 100, 593, 268);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(26, 33, 46, 14);
-		contentPane.add(lblNome);
-		
-		JLabel lblCpf = new JLabel("cpf:");
-		lblCpf.setBounds(26, 88, 46, 14);
+
+		JLabel lblSobrenome = new JLabel("Sobrenome:");
+		lblSobrenome.setBounds(287, 49, 71, 16);
+		contentPane.add(lblSobrenome);
+
+		txtNome = new JTextField();
+		txtNome.setBounds(97, 46, 160, 22);
+		contentPane.add(txtNome);
+		txtNome.setColumns(10);
+
+		JLabel label = new JLabel("Nome:");
+		label.setBounds(44, 49, 38, 16);
+		contentPane.add(label);
+
+		txtSobrenome = new JTextField();
+		txtSobrenome.setColumns(10);
+		txtSobrenome.setBounds(373, 46, 160, 22);
+		contentPane.add(txtSobrenome);
+
+		JLabel lblCpf = new JLabel("Cpf:");
+		lblCpf.setBounds(57, 95, 25, 16);
 		contentPane.add(lblCpf);
-		
-		JLabel lblEndereco = new JLabel("endereco:");
-		lblEndereco.setBounds(198, 88, 67, 14);
+
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setBounds(300, 95, 56, 16);
+		contentPane.add(lblTelefone);
+
+		JLabel lblEndereco = new JLabel("Endereço:");
+		lblEndereco.setBounds(24, 138, 58, 16);
 		contentPane.add(lblEndereco);
+
+		EnderecoController enderecoController = new EnderecoController();
+		ArrayList<Endereco> listaEnderecos = enderecoController.preencherEndereco();
+		Object enderecos[] = listaEnderecos.toArray();
+		final JComboBox cbEndereco = new JComboBox(enderecos);
+		cbEndereco.setBounds(97, 135, 439, 22);
+		contentPane.add(cbEndereco);
 		
+
+		final JComboBox cbTelefones = new JComboBox();
+		TelefoneController telefoneController = new TelefoneController();
+		telefoneController.atualizarListaTelefones(cbTelefones);
+		cbTelefones.setBounds(373, 92, 160, 22);
+		contentPane.add(cbTelefones);
+
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ClienteController controller = new ClienteController();
+				controller.salvarCliente(txtNome.getText(), txtSobrenome.getText(), txtCpf.getText(),
+						cbEndereco.getSelectedItem(), cbTelefones);
+			}
+		});
+
+		btnCadastrar.setBounds(239, 183, 97, 25);
+		contentPane.add(btnCadastrar);
+
 		txtCpf = new JTextField();
-		txtCpf.setBounds(82, 85, 86, 20);
+		txtCpf.setBounds(97, 92, 116, 22);
 		contentPane.add(txtCpf);
 		txtCpf.setColumns(10);
 		
-		txtNome = new JTextField();
-		txtNome.setBounds(82, 30, 86, 20);
-		contentPane.add(txtNome);
-		txtNome.setColumns(10);
-		EnderecoDAO dao = new EnderecoDAO();
-		cbEndereco = new JComboBox(dao.consultarTodos().toArray());
-		cbEndereco.setBounds(269, 82, 363, 27);
-		contentPane.add(cbEndereco);
 		
-		
-		
-		JButton btnSalvar = new JButton("SALVAR");
-		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String mensagem = "";
-				ClienteController controller = new ClienteController();
-				mensagem += controller.validarSobrenome(txtSobrenome.getText());
-				mensagem += controller.validarNome(txtNome.getText());
-				mensagem += controller.validarCpf(txtCpf.getText());
-				mensagem += controller.validarCpfObrigatorio(txtCpf.getText());
-				if(mensagem.isEmpty()) {
-					controller.salvarCliente(txtNome.getText(), txtSobrenome.getText(), txtCpf.getText(), cbEndereco.getSelectedItem());
-				}
-				
-			}
-		});
-		btnSalvar.setBounds(198, 165, 140, 77);
-		contentPane.add(btnSalvar);
-		
-		
-		
-		
-		
-		JLabel lblSobrenome = new JLabel("Sobrenome:");
-		lblSobrenome.setBounds(198, 33, 80, 14);
-		contentPane.add(lblSobrenome);
-		
-		txtSobrenome = new JTextField();
-		txtSobrenome.setBounds(297, 30, 86, 20);
-		contentPane.add(txtSobrenome);
-		txtSobrenome.setColumns(10);
-		
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaMenuClientes.main(null);
-				dispose();
-			}
-		});
-		btnVoltar.setBounds(409, 165, 148, 77);
-		contentPane.add(btnVoltar);
 	}
-
 }
