@@ -44,7 +44,7 @@ public class TelaInternaExclusaoTelefone extends JInternalFrame {
 		setClosable(true);
 		setTitle("Exclusão de telefone.");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 366, 183);
+		setBounds(100, 100, 360, 160);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,7 +52,7 @@ public class TelaInternaExclusaoTelefone extends JInternalFrame {
 
 		JLabel lblId = new JLabel("id:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(128, 58, 27, 27);
+		lblId.setBounds(114, 40, 27, 27);
 		contentPane.add(lblId);
 
 		JLabel lblNewLabel = new JLabel("Informe o id do telefone a ser excluído");
@@ -67,12 +67,12 @@ public class TelaInternaExclusaoTelefone extends JInternalFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		txtId.setBounds(155, 62, 49, 22);
+		txtId.setBounds(151, 45, 49, 22);
 		contentPane.add(txtId);
 
 		JButton btnExcluir = new JButton("Excluir");
 
-		btnExcluir.setBounds(127, 98, 97, 25);
+		btnExcluir.setBounds(114, 90, 97, 25);
 		contentPane.add(btnExcluir);
 
 	}

@@ -57,7 +57,7 @@ public class MenuPrincipal extends JFrame {
 
 		JMenu menuCliente = new JMenu("Clientes");
 		menuCliente.setForeground(Color.WHITE);
-		menuCliente.setBackground(Color.BLACK);
+		menuCliente.setBackground(Color.DARK_GRAY);
 		menuCliente.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/icons8_user_50px.png")));
 		menuBar.add(menuCliente);
 

@@ -82,14 +82,14 @@ public class TelaInternaListagemTelefone extends JInternalFrame {
 	public TelaInternaListagemTelefone() {
 		setClosable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 507, 333);
+		setBounds(100, 100, 520, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 54, 489, 125);
+		panel.setBounds(0, 54, 504, 125);
 		contentPane.add(panel);
 
 		tblTelefones = new JTable();
@@ -101,7 +101,7 @@ public class TelaInternaListagemTelefone extends JInternalFrame {
 
 		JButton btnListar = new JButton("Listar");
 
-		btnListar.setBounds(196, 248, 97, 25);
+		btnListar.setBounds(196, 231, 97, 25);
 		contentPane.add(btnListar);
 	}
 

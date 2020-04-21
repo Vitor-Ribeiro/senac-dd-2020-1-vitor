@@ -45,14 +45,14 @@ public class TelaInternaCadastroCliente extends JInternalFrame {
 	public TelaInternaCadastroCliente() {
 		setClosable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 593, 268);
+		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
-		lblSobrenome.setBounds(287, 49, 71, 16);
+		lblSobrenome.setBounds(24, 109, 71, 16);
 		contentPane.add(lblSobrenome);
 
 		txtNome = new JTextField();
@@ -61,43 +61,43 @@ public class TelaInternaCadastroCliente extends JInternalFrame {
 		txtNome.setColumns(10);
 
 		JLabel label = new JLabel("Nome:");
-		label.setBounds(44, 49, 38, 16);
+		label.setBounds(24, 49, 38, 16);
 		contentPane.add(label);
 
 		txtSobrenome = new JTextField();
 		txtSobrenome.setColumns(10);
-		txtSobrenome.setBounds(373, 46, 160, 22);
+		txtSobrenome.setBounds(97, 106, 160, 22);
 		contentPane.add(txtSobrenome);
 
 		JLabel lblCpf = new JLabel("Cpf:");
-		lblCpf.setBounds(57, 95, 25, 16);
+		lblCpf.setBounds(287, 49, 25, 16);
 		contentPane.add(lblCpf);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(300, 95, 56, 16);
+		lblTelefone.setBounds(287, 109, 56, 16);
 		contentPane.add(lblTelefone);
 
 		JLabel lblEndereco = new JLabel("Endereço:");
-		lblEndereco.setBounds(24, 138, 58, 16);
+		lblEndereco.setBounds(24, 156, 58, 16);
 		contentPane.add(lblEndereco);
 
 		
 		final JComboBox cbEndereco = new JComboBox();
-		cbEndereco.setBounds(97, 135, 439, 22);
+		cbEndereco.setBounds(97, 153, 439, 22);
 		contentPane.add(cbEndereco);
 		
 
 		final JComboBox cbTelefones = new JComboBox();
-		cbTelefones.setBounds(373, 92, 160, 22);
+		cbTelefones.setBounds(376, 106, 160, 22);
 		contentPane.add(cbTelefones);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
 		
-		btnCadastrar.setBounds(239, 183, 97, 25);
+		btnCadastrar.setBounds(234, 196, 97, 25);
 		contentPane.add(btnCadastrar);
 
 		txtCpf = new JTextField();
-		txtCpf.setBounds(97, 92, 116, 22);
+		txtCpf.setBounds(373, 46, 160, 22);
 		contentPane.add(txtCpf);
 		txtCpf.setColumns(10);
 	}

@@ -46,7 +46,7 @@ public class TelaInternaCadastroTelefone extends JInternalFrame {
 	public TelaInternaCadastroTelefone() {
 		setClosable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 388, 242);
+		setBounds(100, 100, 400, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,28 +61,28 @@ public class TelaInternaCadastroTelefone extends JInternalFrame {
 		contentPane.add(txtCodigoPais);
 
 		JLabel lblDdd = new JLabel("DDD:");
-		lblDdd.setBounds(72, 51, 34, 16);
+		lblDdd.setBounds(165, 16, 46, 16);
 		contentPane.add(lblDdd);
 
 		final JTextField txtDdd = new JTextField();
-		txtDdd.setBounds(118, 48, 23, 22);
+		txtDdd.setBounds(209, 13, 23, 22);
 		contentPane.add(txtDdd);
 
 		JLabel lblNumero = new JLabel("Número:");
-		lblNumero.setBounds(165, 19, 56, 16);
+		lblNumero.setBounds(12, 51, 56, 16);
 		contentPane.add(lblNumero);
 
 		final JTextField txtNumero = new JTextField();
-		txtNumero.setBounds(236, 16, 82, 22);
+		txtNumero.setBounds(78, 48, 82, 22);
 		contentPane.add(txtNumero);
 
 		final JRadioButton rbMovel = new JRadioButton("Movel");
-		rbMovel.setBounds(165, 51, 61, 25);
+		rbMovel.setBounds(265, 47, 61, 25);
 		rbMovel.setSelected(true);
 		contentPane.add(rbMovel);
 
 		final JRadioButton rbAtivo = new JRadioButton("Ativo");
-		rbAtivo.setBounds(240, 51, 61, 25);
+		rbAtivo.setBounds(188, 47, 61, 25);
 		rbAtivo.setSelected(true);
 		contentPane.add(rbAtivo);
 
@@ -97,19 +97,19 @@ public class TelaInternaCadastroTelefone extends JInternalFrame {
 				}
 			}
 		});
-		btnCancelar.setBounds(204, 149, 97, 25);
+		btnCancelar.setBounds(214, 148, 97, 25);
 		contentPane.add(btnCancelar);
 
 		JLabel lblDono = new JLabel("Dono:");
-		lblDono.setBounds(12, 99, 34, 16);
+		lblDono.setBounds(10, 96, 34, 16);
 		contentPane.add(lblDono);
 		
 		final JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(61, 96, 257, 22);
+		comboBox.setBounds(54, 93, 257, 22);
 		contentPane.add(comboBox);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(84, 149, 97, 25);
+		btnCadastrar.setBounds(78, 148, 97, 25);
 		contentPane.add(btnCadastrar);
 
 	}
