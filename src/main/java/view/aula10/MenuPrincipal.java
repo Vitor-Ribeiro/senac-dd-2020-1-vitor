@@ -18,11 +18,11 @@ import javax.swing.KeyStroke;
 
 public class MenuPrincipal extends JFrame {
 
-	private int limitadorDeTelaClientes = 0;
-	private int limitadorDeTelaAutores = 0;
-	private int limitadorExclusaoTelefones = 0;
-	private int limitadorListagemTelefones = 0;
-	private int limitadorCadastroTelefones = 0;
+	private int limitarTelaClientes = 0;
+	private int limitarTelaAutores = 0;
+	private int limitarExclusaoTelefones = 0;
+	private int limitarListagemTelefones = 0;
+	private int limitarCadastroTelefones = 0;
 	private TelaInternaCadastroCliente cadastroCliente;
 	private TelaInternaCadastroTelefone cadastroTelefone;
 	private TelaInternaExclusaoTelefone exclusaoTelefone;
@@ -70,14 +70,14 @@ public class MenuPrincipal extends JFrame {
 		menuItemCadastroCliente.setBackground(Color.DARK_GRAY);
 		menuItemCadastroCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (limitadorDeTelaClientes == 0) {
-					limitadorDeTelaClientes++;
+				if (limitarTelaClientes == 0) {
+					limitarTelaClientes++;
 					cadastroCliente = new TelaInternaCadastroCliente();
 					desktopPane.add(cadastroCliente);
 					cadastroCliente.show();
 				}
 				if (cadastroCliente.isClosed()) {
-					limitadorDeTelaClientes--;
+					limitarTelaClientes--;
 				}
 			}
 		});
@@ -99,13 +99,13 @@ public class MenuPrincipal extends JFrame {
 		menuItemSobre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
 		menuItemSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (limitadorDeTelaAutores == 0) {
-					limitadorDeTelaAutores++;
+				if (limitarTelaAutores == 0) {
+					limitarTelaAutores++;
 					sobreAutor = new TelaSobreAutor();
 					sobreAutor.setVisible(true);
 				}
 				if (!sobreAutor.isDisplayable()) {
-					limitadorDeTelaAutores--;
+					limitarTelaAutores--;
 				}
 			}
 		});
@@ -120,14 +120,14 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem menuItemListarTodos = new JMenuItem("Listar todos");
 		menuItemListarTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (limitadorListagemTelefones == 0) {
-					limitadorListagemTelefones++;
+				if (limitarListagemTelefones == 0) {
+					limitarListagemTelefones++;
 					listagemTelefone = new TelaInternaListagemTelefone();
 					desktopPane.add(listagemTelefone);
 					listagemTelefone.show();
 				}
 				if (listagemTelefone.isClosed()) {
-					limitadorListagemTelefones--;
+					limitarListagemTelefones--;
 				}
 			}
 		});
@@ -140,14 +140,14 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem menuItemExcluirTelefone = new JMenuItem("Excluir telefone");
 		menuItemExcluirTelefone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (limitadorExclusaoTelefones == 0) {
-					limitadorExclusaoTelefones++;
+				if (limitarExclusaoTelefones == 0) {
+					limitarExclusaoTelefones++;
 					exclusaoTelefone = new TelaInternaExclusaoTelefone();
 					desktopPane.add(exclusaoTelefone);
 					exclusaoTelefone.show();
 				}
 				if (exclusaoTelefone.isClosed()) {
-					limitadorExclusaoTelefones--;
+					limitarExclusaoTelefones--;
 				}
 			}
 		});
@@ -160,14 +160,14 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem menuItemCadastrarTelefone = new JMenuItem("Cadastrar Telefone");
 		menuItemCadastrarTelefone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (limitadorCadastroTelefones == 0) {
-					limitadorCadastroTelefones++;
+				if (limitarCadastroTelefones == 0) {
+					limitarCadastroTelefones++;
 					cadastroTelefone = new TelaInternaCadastroTelefone();
 					desktopPane.add(cadastroTelefone);
 					cadastroTelefone.show();
 				}
 				if (cadastroTelefone.isClosed()) {
-					limitadorCadastroTelefones--;
+					limitarCadastroTelefones--;
 				}
 			}
 		});
