@@ -79,6 +79,12 @@ public class MenuPrincipal extends JFrame {
 				if (cadastroCliente.isClosed()) {
 					limitarTelaClientes--;
 				}
+				if (limitarTelaClientes == 0) {
+					limitarTelaClientes++;
+					cadastroCliente = new TelaInternaCadastroCliente();
+					desktopPane.add(cadastroCliente);
+					cadastroCliente.show();
+				}
 			}
 		});
 		menuItemCadastroCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
@@ -107,6 +113,11 @@ public class MenuPrincipal extends JFrame {
 				if (!sobreAutor.isDisplayable()) {
 					limitarTelaAutores--;
 				}
+				if (limitarTelaAutores == 0) {
+					limitarTelaAutores++;
+					sobreAutor = new TelaSobreAutor();
+					sobreAutor.setVisible(true);
+				}
 			}
 		});
 		menuAutores.add(menuItemSobre);
@@ -129,6 +140,12 @@ public class MenuPrincipal extends JFrame {
 				if (listagemTelefone.isClosed()) {
 					limitarListagemTelefones--;
 				}
+				if (limitarListagemTelefones == 0) {
+					limitarListagemTelefones++;
+					listagemTelefone = new TelaInternaListagemTelefone();
+					desktopPane.add(listagemTelefone);
+					listagemTelefone.show();
+				}
 			}
 		});
 		menuItemListarTodos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0));
@@ -149,6 +166,12 @@ public class MenuPrincipal extends JFrame {
 				if (exclusaoTelefone.isClosed()) {
 					limitarExclusaoTelefones--;
 				}
+				if (limitarExclusaoTelefones == 0) {
+					limitarExclusaoTelefones++;
+					exclusaoTelefone = new TelaInternaExclusaoTelefone();
+					desktopPane.add(exclusaoTelefone);
+					exclusaoTelefone.show();
+				}
 			}
 		});
 		menuItemExcluirTelefone.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
@@ -168,6 +191,12 @@ public class MenuPrincipal extends JFrame {
 				}
 				if (cadastroTelefone.isClosed()) {
 					limitarCadastroTelefones--;
+				}
+				if (limitarCadastroTelefones == 0) {
+					limitarCadastroTelefones++;
+					cadastroTelefone = new TelaInternaCadastroTelefone();
+					desktopPane.add(cadastroTelefone);
+					cadastroTelefone.show();
 				}
 			}
 		});
